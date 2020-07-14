@@ -14,7 +14,7 @@
 
     <div class="ins-inf-top-fix">
         <div class="ins-inf-head">
-            <a href="javascript:void(0);"><!--<img src="../../../images/user/back1.png"/>--></a>
+            <a id="wikiBack" href="javascript:void(0);"><img src="../../../images/user/back1.png"/></a>
             <h1>百科</h1>
             <div></div>
         </div>
@@ -234,6 +234,11 @@
                 $(".ins-inf-nav").removeClass('fix')
             }
         });
+    </script>
+    <script type="text/javascript">
+        $("#wikiBack").on("click",function () {
+            window.history.back();
+        })
     </script>
 </body>
 </html>
