@@ -8,4 +8,4 @@
  https://liuer1211.github.io/uimodel/pages/index/index.html
  
 #### 页面效果图
- https://liuer1211.github.io/uimodel/static/imgs/首页.png
+ ![image.png](https://liuer1211.github.io/uimodel/static/imgs/首页.png)
