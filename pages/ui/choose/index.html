@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        /*input做选择器 star*/
+        .choose-main{
+            padding: 0.6rem;
+            margin-top: 2.5rem;
+        }
+        .choose-main-title{
+            padding: 0 0 0.8rem;
+        }
+        .in-inner {
+            -webkit-appearance: none;
+            background-color: #fff;
+            background-image: none;
+            border: none;
+            padding: 0 1.5rem 0 0.8rem;
+            box-sizing: border-box;
+            display: inline-block;
+            height: 2.2rem;
+            line-height: 2.2rem;
+            outline: none;
+            width: 100%;
+            cursor: pointer;
+            font-size: 0.75rem;
+            color: #606266;
+        }
+        .in-main-re{
+            position: relative;
+        }
+        .in-main-i-re{
+            position: relative;
+            cursor: pointer;
+            border: 0.06rem solid #c1c1c1;
+            box-sizing: border-box;
+            border-radius: 0.2rem;
+        }
+        .in-main-ab{
+            position: absolute;
+            z-index: 99;
+            left: 0;
+            top: 2.4rem;
+            border: 0.05rem solid #e4e7ed;
+            border-radius:0.2rem;
+            background-color: #fff;
+            box-shadow: 0 0.1rem 0.6rem 0 rgba(0,0,0,.1);
+            box-sizing: border-box;
+            padding: 0.3rem 0;
+            width: 100%;
+            display: none;
+            transition: all .3s;
+        }
+        .in-main-ab.active{
+            display: block;
+            transition: all .3s;
+        }
+        .in-main-ab-name{
+            font-size: 0.75rem;
+            color: #606266;
+            cursor: pointer;
+            padding: 0.3rem 0.8rem;
+            word-break: break-all;
+        }
+        .in-i{
+            position: absolute;
+            top: 0.6rem;
+            right: 0;
+            width: 1rem;
+            height: 1rem;
+            min-width: 1rem;
+            min-height: 1rem;
+            background: url("../../../images/serviceType/iconDown.jpg") no-repeat;
+            background-size: cover;
+            transition: all .3s;
+            transform: rotate(0deg);
+            margin-right: 0.2rem;
+        }
+        .in-i.active{
+            transform: rotate(180deg);
+        }
+        /*input做选择器 end*/
+        /*上到下 ----- 渐变   start*/
+        .upToBottom{
+            animation:upToBottom 1s ;
+            -webkit-animation:upToBottom 1s ; /*Safari and Chrome*/
+        }
+        @keyframes upToBottom
+        {
+            from {top:2rem;}/*执行动画的初始位置*/
+            to {top:2.4rem;}/*动画结束位置*/
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-webkit-keyframes upToBottom /*Safari and Chrome*/
+        {
+            from {top:2rem;}/*执行动画的初始位置*/
+            to {top:2.4rem;}/*动画结束位置*/
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        /*上到下 ----- 渐变   end*/
+        /*淡入淡出 start*/
+        .xm-main{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+        }
+        .xm-left{
+            flex: 1;
+            background: #7f7f7f;
+            position: relative;
+        }
+        .xm-right{
+            flex: 1;
+            background: #606266;
+            position: relative;
+        }
+        .xm-up{
+            background: #e5e5e5;
+            position: relative;
+        }
+        .xm-down{
+            background: #e5e5e5;
+            position: relative;
+        }
+        .xm-img{
+            width: 100%;
+            height: 10rem;
+            object-fit: cover;
+            display: block;
+            transition: all 0.6s ease-out;
+        }
+        /*.xm-img:hover{
+            transition: all 0.6s;
+            transform: scale(1.1);
+        }*/
+        .xm-cen{
+            position: absolute;
+            left: 10%;
+            top: 10%;
+            color: #fff;
+        }
+        .xm-h1{
+            margin: 0;
+            padding: 0;
+        }
+        .xm-p{
+            margin: 0;
+            padding: 0;
+        }
+        .xm-a{
+            display: block;
+            overflow: hidden;
+        }
+        a:visited {
+            color: #666;
+        }
+        a {
+            text-decoration: none;
+            outline: none;
+        }
+        /*动画*/
+        .animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            visibility: hidden;
+        }
+        .an-left{
+            animation-delay: 0.2s;
+            visibility: visible;
+            animation-name: fadeInLeft;
+        }
+        .an-right{
+            animation-delay: 0.4s;
+            visibility: visible;
+            animation-name: fadeInRight;
+        }
+        .an-up{
+            animation-delay: 0.2s;
+            visibility: visible;
+            animation-name: fadeInUp;
+        }
+        .an-down{
+            animation-delay: 0.2s;
+            visibility: visible;
+            animation-name: fadeInDown;
+        }
+        /*右下到上*/
+        @-webkit-keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 100%, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 100%, 0);
+                -ms-transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 100%, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                -ms-transform: none;
+                transform: none;
+            }
+        }
+        .fadeInUp {
+            -webkit-animation-name: fadeInUp;
+            animation-name: fadeInUp;
+        }
+        /*右上到下*/
+        @-webkit-keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                -ms-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                -ms-transform: none;
+                transform: none;
+            }
+        }
+        .fadeInDown {
+            -webkit-animation-name: fadeInDown;
+            animation-name: fadeInDown;
+        }
+        /*由左到右进入*/
+        @-webkit-keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, 0, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(-100%, 0, 0);
+                -ms-transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, 0, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                -ms-transform: none;
+                transform: none;
+            }
+        }
+        .fadeInLeft {
+            -webkit-animation-name: fadeInLeft;
+            animation-name: fadeInLeft;
+        }
+        /*由右到左进入*/
+        @-webkit-keyframes fadeInRight {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(100%, 0, 0);
+                transform: translate3d(100%, 0, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+        @keyframes fadeInRight {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(100%, 0, 0);
+                -ms-transform: translate3d(100%, 0, 0);
+                transform: translate3d(100%, 0, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                -ms-transform: none;
+                transform: none;
+            }
+        }
+        .fadeInRight {
+            -webkit-animation-name: fadeInRight;
+            animation-name: fadeInRight;
+        }
+        /*淡入淡出 end*/
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>选择器,淡入淡出</h1>
+        <div></div>
+    </div>
+    <!--选择器-->
+    <div class="choose-main">
+        <div class="choose-main-title">选择器</div>
+        <div class="in-main-re">
+            <div id="typeMain" class="in-main-i-re">
+                <input class="in-inner" type="text" readonly="readonly" autocomplete="off" placeholder="请选择" />
+                <i class="in-i"></i>
+            </div>
+            <div id="typeChoose" class="in-main-ab upToBottom">
+                <div class="in-main-ab-name">苹果</div>
+                <div class="in-main-ab-name">香蕉</div>
+            </div>
+        </div>
+    </div>
+    <!--淡入淡出-->
+    <div style="padding: 0 0.6rem">
+        <div style="height: 5rem;"></div>
+        <div class="xm-down ani-a animated">
+            <a class="xm-a" href="javascript:;">
+                <img class="xm-img" src="img/img1.jpg"/>
+                <div class="xm-cen">
+                    <h1 class="xm-h1">标题</h1>
+                    <p class="xm-p">内容 左边</p>
+                </div>
+            </a>
+        </div>
+        <div style="height: 5rem;"></div>
+        <div class="xm-up ani-b animated">
+            <a class="xm-a" href="javascript:;">
+                <img class="xm-img" src="img/img1.jpg"/>
+                <div class="xm-cen">
+                    <h1 class="xm-h1">标题</h1>
+                    <p class="xm-p">内容 左边</p>
+                </div>
+            </a>
+        </div>
+        <div style="height: 5rem;"></div>
+        <div class="xm-main">
+            <div class="xm-left ani-c animated">
+                <a class="xm-a" href="javascript:;">
+                    <img class="xm-img" src="img/img1.jpg"/>
+                    <div class="xm-cen">
+                        <h1 class="xm-h1">标题</h1>
+                        <p class="xm-p">内容 左边</p>
+                    </div>
+                </a>
+            </div>
+            <div class="xm-right ani-d animated">
+                <a class="xm-a" href="javascript:;">
+                    <img class="xm-img" src="img/img2.jpg"/>
+                    <div class="xm-cen">
+                        <h1 class="xm-h1">标题</h1>
+                        <p class="xm-p">内容 右边</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div style="height: 5rem;"></div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+        //点击input
+        $("#typeMain").on("click",function (event) {
+            // 除ie:event.stopPropagation() ; 适配ie:event.cancelBubble = true;  方法2
+            // event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true;//不在派发事件,阻止事件冒泡
+            let flag=$(this).find(".in-i").hasClass("active")
+            if(flag){
+                //存在就隐藏
+                $(this).find(".in-i").removeClass("active")
+                $("#typeChoose").removeClass("active")
+            }else{
+                //不存在就显示
+                $(this).find(".in-i").addClass("active")
+                $("#typeChoose").addClass("active")
+            }
+            return false;//阻止冒泡 方法1
+        })
+        //选择后，改变input值
+        $("#typeChoose div").on("click",function (event) {
+            // event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true;//不在派发事件,阻止事件冒泡
+            //隐藏
+            $("#typeMain .in-i").removeClass("active")
+            $("#typeChoose").removeClass("active")
+            //改变值
+            $("#typeMain .in-inner").val($(this).text())
+            return false;//阻止冒泡
+        })
+        // 点击其他地方隐藏
+        $(document).on("click",function () {
+            //隐藏
+            $("#typeMain .in-i").removeClass("active")
+            $("#typeChoose").removeClass("active")
+        })
+        //滑倒固定位置，添加属性，加动画
+        $(function() {
+            move();
+            $(window).on('scroll', function () {
+                move();
+            });
+            function move() {
+                addAnimate('.ani-a', 'an-down');
+                addAnimate('.ani-b', 'an-up');
+                addAnimate('.ani-c', 'an-left');
+                addAnimate('.ani-d', 'an-right');
+            }
+            function addAnimate(el, animateName) {
+                $(el).each(function () {
+                    var _scrTop = $(window).scrollTop(); //滚动条距离顶部的距离
+                    var _top = $(this).offset().top;     //获取匹配元素在当前视口的相对偏移
+                    var _winH = $(window).height();      //window 元素的当前高度
+                    if (_scrTop > _top - _winH / 1.5) {
+                        $(this).addClass(animateName);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

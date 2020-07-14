@@ -1,0 +1,95 @@
+@charset "UTF-8";
+/**
+ * @title   CSS Document
+ * @authors dongdong.wang@newtouch.com
+ * @version Ver 1.0.0
+ */
+
+
+/*--------底部 start-----------*/
+.xm-foot-main {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+}
+
+.xm-foot-flex-main {
+    padding: 0.2rem 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.xm-foot-main-a {
+    flex: 1;
+}
+
+.xm-foot-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.xm-foot-fix-h{
+    height: 2.5rem;
+}
+
+.xm-foot-flex-img {
+    width: 1rem;
+    height: 1rem;
+}
+
+.xm-foot-flex-span {
+    color: rgb(123, 123, 123);
+    font-size: 0.7rem;
+    margin-top: 0.2rem;
+}
+
+.xm-foot-flex .xm-foot-img-home {
+    background: url(../../images/user/home2.png) no-repeat center;
+    background-size: cover;
+}
+
+.xm-foot-flex .xm-foot-img-ins {
+    background: url(../../images/user/insurance1.png) no-repeat center;
+    background-size: cover;
+}
+
+.xm-foot-flex .xm-foot-img-ser {
+    background: url(../../images/user/service1.png) no-repeat center;
+    background-size: cover;
+}
+
+.xm-foot-flex .xm-foot-img-my {
+    background: url(../../images/user/my2.png) no-repeat center;
+    background-size: cover;
+}
+
+.xm-foot-flex.active span{
+    color: rgb(254, 102, 18);
+}
+
+.xm-foot-flex.active .xm-foot-img-home{
+    background: url(../../images/user/home3.png) no-repeat center;
+    background-size: cover;
+}
+
+.xm-foot-flex.active .xm-foot-img-ins{
+    background: url(../../images/user/insurance2.png) no-repeat center;
+    background-size: cover;
+}
+
+.xm-foot-flex.active .xm-foot-img-ser{
+    background: url(../../images/user/service2.png) no-repeat center;
+    background-size: cover;
+}
+
+.xm-foot-flex.active .xm-foot-img-my{
+    background: url(../../images/user/my4.png) no-repeat center;
+    background-size: cover;
+}
+
+/*--------底部 end-----------*/

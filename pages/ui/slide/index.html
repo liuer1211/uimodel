@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> </title>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css"  href="../../../css/common/base.css" />
+    <link rel="stylesheet" type="text/css"  href="../../../css/common/animate.min.css" />
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .slide-main{
+            margin-top: 2.5rem;
+        }
+        .slide-list-main{
+
+        }
+        .slide-list{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 0.6rem;
+            border-bottom: 0.03rem solid #e4e4e4;
+            font-size: 0.8rem;
+        }
+        .slide-list-img{
+            width: 1.5rem;
+            height: 1.5rem;
+            min-width: 1.5rem;
+            object-fit: cover;
+            margin-right: 0.6rem;
+            border-radius: 1rem;
+        }
+        .slide-list-model{
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <style type="text/css">
+        /*不能下载 弹出层 start*/
+        .ele_pol_toast_nodown{
+            display: none;
+            width: 100%;
+            position: fixed;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0 auto;
+        }
+        .ele_pol_toast_nodown.active{
+            display: block;
+        }
+        .ele_pol_nodown_main{
+            width: 14rem;
+            height: 16rem;
+            position: absolute;
+            top: 43%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .ele_pol_nodown_cen{
+            background: #FFFFFF;
+            border-radius: 0.4rem;
+        }
+        .ele_pol_nodown_up{
+
+        }
+        .nodown_bg{
+            display: block;
+            height: 9rem;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 0.4rem;
+        }
+        .ele_pol_nodown_info{
+            font-size: 0.8rem;
+            color: #000;
+            padding: 1.5rem 0.4rem;
+            text-align: center;
+        }
+        .nodown_sp{
+            color: rgb(254,123,51);
+            cursor: pointer;
+        }
+        .ele_pol_nodown_but{
+            padding: 0 1rem 2rem;
+        }
+        .nodown_a{
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+            border-radius: 1.5rem;
+            font-size: 0.8rem;
+            padding: 0.5rem 0;
+            color: #fff;
+            background-image: linear-gradient(to right, rgb(251, 69, 48), rgb(244, 158, 16)) !important;
+        }
+        .ele_pol_nodown_off{
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .nodown_off_icon{
+            display: -webkit-flex; /* Safari */
+            display: block;
+            width: 1.5rem;
+            height: 1.5rem;
+            cursor: pointer;
+        }
+        /*不能下载 弹出层 end*/
+    </style>
+    <style type="text/css">
+        /*城市 弹出*/
+        .ele_pro_city_toast{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            background: #FFF;
+            display: none;
+        }
+        .ele_pro_city_toast.active{
+            display: block;
+        }
+        .ele_pro_city_head{
+            height: 2.45rem;
+            border-bottom: 0.05rem solid #f5f5f5;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            line-height: 2.4rem;
+            background: #fff;
+            z-index: 9999;
+        }
+        .ele_pro_city_fl{
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0.8rem;
+            box-sizing: border-box;
+            background: #000;
+            color: #fff;
+        }
+        .ele_pro_city_fl h1{
+            font-size: 0.8rem;
+            color: #fff;
+            font-weight: 500;
+        }
+        .ele_pro_city_fl_off{
+            cursor: pointer;
+            width: 1rem;
+            height: 1rem;
+            min-width: 1rem;
+            min-height: 1rem;
+            display: block;
+        }
+        .ele_pro_city_cen{
+            margin-top: 2.5rem;
+            padding: 5% 0 0 5%;
+        }
+        .ele_pro_city_flex{
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-flow: wrap;
+            width: 100%;
+        }
+        .ele_pro_city_flex a{
+            width: 20%;
+            display: inline-block;
+            margin-right: 5%;
+            margin-bottom: 5%;
+            color: #000;
+        }
+        .ele_pro_city_name{
+            padding: 0.5rem 0.2rem;
+            text-align: center;
+            background: rgba(243, 243, 245, 1);
+            border-radius: 0.2rem;
+            font-size: 0.7rem;
+            color: rgb(146, 143, 143);
+        }
+        .ele_pro_city_name.active{
+            color: #000;
+            font-weight: 600;
+        }
+        .animated{
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        .an-up{
+            animation-delay: 0.2s;
+            animation-name: fadeInUp;
+        }
+        .an-left{
+            animation-delay: 0.2s;
+            animation-name: fadeInLeft;
+        }
+        .noScroll{
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+    <style type="text/css">
+        /*左侧滑出*/
+        .slide-left-toast{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            background: #5a5a5ae3;
+            opacity: 0.8;
+            display: none;
+        }
+        .slide-left-toast.active{
+            display: block;
+        }
+        .slide-toast-info{
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            overflow: auto;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            background: #fff;
+        }
+        .slide-info-list{
+            padding: 0.6rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            border-bottom: 0.03rem solid #e4e4e4;
+        }
+
+    </style>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        header {
+            background: #f7483b;
+            border-bottom: 1px solid #ccc
+        }
+
+        header h2 {
+            text-align: center;
+            line-height: 54px;
+            font-size: 16px;
+            color: #fff
+        }
+
+        .list-ul {
+            overflow: hidden
+        }
+
+        .list-li {
+            line-height: 60px;
+            border-bottom: 1px solid #fcfcfc;
+            position: relative;
+            padding: 0 12px;
+            color: #666;
+            background: #f2f2f2;
+            -webkit-transform: translateX(0px);
+        }
+
+        .btn {
+            position: absolute;
+            top: 0;
+            right: -80px;
+            text-align: center;
+            background: #ffcb20;
+            color: #fff;
+            width: 80px
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>滑动</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="slide-main">
+        <div class="slide-list-main">
+            <div class="slide-list" id="slideToa">
+                <img class="slide-list-img" src="img/img1.jpg"/>
+                <div class="slide-list-model">左侧滑出</div>
+            </div>
+            <div class="slide-list" id="eleCity">
+                <img class="slide-list-img" src="img/img1.jpg"/>
+                <div class="slide-list-model">底部滑出<span></span></div>
+            </div>
+            <div class="slide-list">
+                <img class="slide-list-img" src="img/img1.jpg"/>
+                <div class="slide-list-model">右滑删除</div>
+            </div>
+            <div class="slide-list" id="noload">
+                <img class="slide-list-img" src="img/img1.jpg"/>
+                <div class="slide-list-model">奖券</div>
+            </div>
+
+            <section class="list">
+                <ul class="list-ul">
+                    <li id="li" class="list-li">
+                        <div class="con">
+                            你的快递到了，请到楼下签收
+                        </div>
+                        <div class="btn">删除</div>
+                    </li>
+                    <li class="list-li">
+                        <div class="con">
+                            哇，你在干嘛，快点来啊就等你了
+                        </div>
+                        <div class="btn">删除</div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <!--奖券弹出层-->
+        <div id="noDowmLoad" class="ele_pol_toast_nodown">
+            <div class="ele_pol_nodown_main">
+                <div class="ele_pol_nodown_cen">
+                    <div class="ele_pol_nodown_up">
+                        <img class="nodown_bg" src="img/img1.jpg"/>
+                    </div>
+                    <div class="ele_pol_nodown_info">
+                        <span class="nodown_sp">内容提示</span>
+                    </div>
+                    <div class="ele_pol_nodown_but">
+                        <a id="know" class="nodown_a" href="javascript:;">知道了</a>
+                    </div>
+                </div>
+                <div class="ele_pol_nodown_off">
+                    <img id="knowOff" class="nodown_off_icon" src="img/off.png"/>
+                </div>
+            </div>
+        </div>
+        <!--城市 选择 隐藏-->
+        <div class="ele_pro_city_toast animated an-up">
+            <div class="ele_pro_city_head">
+                <div class="ele_pro_city_fl">
+                    <div></div>
+                    <h1>选择城市</h1>
+                    <img class="ele_pro_city_fl_off" src="img/off.png" />
+                </div>
+            </div>
+            <div class="ele_pro_city_cen">
+                <div class="ele_pro_city_flex" id="eleCityType">
+                    <a data-num="" data-name="安徽" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">安徽</div>
+                    </a>
+                    <a data-num="" data-name="北京" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">北京</div>
+                    </a>
+                    <a data-num="" data-name="重庆" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">重庆</div>
+                    </a>
+                    <a data-num="" data-name="大连" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">大连</div>
+                    </a>
+                    <a data-num="" data-name="福建" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">福建</div>
+                    </a>
+                    <a data-num="" data-name="甘肃" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">甘肃</div>
+                    </a>
+                    <a data-num="" data-name="贵州" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">贵州</div>
+                    </a>
+                    <a data-num="" data-name="广西" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">广西</div>
+                    </a>
+                    <a data-num="" data-name="广东" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">广东</div>
+                    </a>
+                    <a data-num="" data-name="黑龙江" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">黑龙江</div>
+                    </a>
+                    <a data-num="" data-name="湖北" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">湖北</div>
+                    </a>
+                    <a data-num="" data-name="湖南" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">湖南</div>
+                    </a>
+                    <a data-num="" data-name="河北" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">河北</div>
+                    </a>
+                    <a data-num="" data-name="河南" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">河南</div>
+                    </a>
+                    <a data-num="" data-name="海南" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">海南</div>
+                    </a>
+                    <a data-num="" data-name="江苏" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">江苏</div>
+                    </a>
+                    <a data-num="" data-name="吉林" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">吉林</div>
+                    </a>
+                    <a data-num="" data-name="江西" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">江西</div>
+                    </a>
+                    <a data-num="" data-name="辽宁" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">辽宁</div>
+                    </a>
+                    <a data-num="" data-name="宁夏" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">宁夏</div>
+                    </a>
+                    <a data-num="" data-name="内蒙古" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">内蒙古</div>
+                    </a>
+                    <a data-num="" data-name="宁波" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">宁波</div>
+                    </a>
+                    <a data-num="" data-name="青海" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">青海</div>
+                    </a>
+                    <a data-num="" data-name="青岛" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">青岛</div>
+                    </a>
+                    <a data-num="" data-name="四川" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">四川</div>
+                    </a>
+                    <a data-num="" data-name="陕西" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">陕西</div>
+                    </a>
+                    <a data-num="" data-name="上海" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">上海</div>
+                    </a>
+                    <a data-num="" data-name="山西" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">山西</div>
+                    </a>
+                    <a data-num="" data-name="山东" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">山东</div>
+                    </a>
+                    <a data-num="" data-name="深圳" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">深圳</div>
+                    </a>
+                    <a data-num="" data-name="天津" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">天津</div>
+                    </a>
+                    <a data-num="" data-name="西藏" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">西藏</div>
+                    </a>
+                    <a data-num="" data-name="新疆" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">新疆</div>
+                    </a>
+                    <a data-num="" data-name="厦门" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">云南</div>
+                    </a>
+                    <a data-num="" data-name="云南" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">厦门</div>
+                    </a>
+                    <a data-num="" data-name="浙江" data-code="" href="javascript:;">
+                        <div class="ele_pro_city_name">浙江</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--左侧滑出-->
+        <div class="slide-left-toast animated an-left">
+            <div class="slide-toast-info">
+                <div class="slide-info-list">主页</div>
+                <div class="slide-info-list">活动</div>
+                <div class="slide-info-list">新闻</div>
+            </div>
+        </div>
+
+        <div>
+            底部滑出，健康告知
+            顶部logo，变形
+            左右切换
+            左侧列表切换
+        </div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/zepto.slide.js"></script>
+    <script type="text/javascript">
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+    <script type="text/javascript">
+        // 不能下载
+        $("#noload").on("click",function () {
+            $("#noDowmLoad").addClass("active");
+            $('html,body').addClass('noScroll');
+        })
+        $("#know").on("click",function () {
+            $("#noDowmLoad").removeClass("active");
+            $('html,body').removeClass('noScroll');
+        })
+        $("#knowOff").on("click",function () {
+            $("#noDowmLoad").removeClass("active");
+            $('html,body').removeClass('noScroll');
+        })
+    </script>
+    <script type="text/javascript">
+        //城市 点击
+        $("#eleCity").on("click",function () {
+            $(".ele_pro_city_toast").addClass("active");
+            $('html,body').addClass('noScroll');
+        })
+        //城市 选择
+        $("#eleCityType a").on("click",function () {
+            $(this).find(".ele_pro_city_name").addClass("active")
+            $(this).siblings().find(".ele_pro_city_name").removeClass("active")
+            $(".ele_pro_city_toast").removeClass("active");
+            $('html,body').removeClass('noScroll');
+            $(".slide-list-model span").text($(this).text())
+        })
+        //城市 关闭
+        $(".ele_pro_city_fl_off").on("click",function () {
+            $(".ele_pro_city_toast").removeClass("active");
+            $('html,body').removeClass('noScroll');
+        })
+    </script>
+    <script type="text/javascript">
+        // 左侧滑出
+        $('#slideToa').on('click',function () {
+            $('.slide-left-toast').addClass('active')
+            $('html,body').addClass('noScroll');
+        })
+        $('.slide-left-toast').on('click',function () {
+            $('.slide-left-toast').removeClass('active')
+            $('html,body').removeClass('noScroll');
+        })
+        $('.slide-toast-info .slide-info-list').on('click',function () {
+            $('.slide-left-toast').removeClass('active')
+            $('html,body').removeClass('noScroll');
+        })
+    </script>
+    <script type="text/javascript">
+        // 左滑删除
+        $(function() {
+            $('.list-li').touchWipe({itemDelete: '.btn'});
+        });
+    </script>
+</body>
+</html>

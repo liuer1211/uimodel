@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #ffffff;
+            z-index: 999;
+        }
+        /*内容*/
+        .index-content-main{
+            margin: 2.5rem 0;
+            padding: 0.6rem 0.6rem 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .index-content-flex{
+            width: 50%;
+            box-sizing: border-box;
+            padding-bottom: 0.6rem;
+        }
+        .index-content-flex:nth-child(odd) {
+            padding-right: 0.3rem;
+        }
+        .index-content-flex:nth-child(even) {
+            padding-left: 0.3rem;
+        }
+        .index-content-model{
+            background: #35e7c6;
+            text-align: center;
+            padding: 2rem 0.6rem;
+            color: #fff;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-radius: 0.2rem;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+        }
+        .c-change1{
+            background-image: linear-gradient(to right, rgb(243, 176, 26), rgb(245, 87, 0));
+        }
+        .c-change2{
+            background-image: linear-gradient(to right, rgb(210, 26, 243), rgb(121, 0, 245));
+        }
+        .c-change3{
+            background-image: linear-gradient(to top, rgb(70, 239, 83), rgb(0, 246, 255));
+        }
+        /*底部*/
+        .index-footer-main{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            box-sizing: border-box;
+            background: #fff;
+            align-items: center;
+            height: 2.5rem;
+            padding: 0 0.8rem;
+            box-shadow: 0px -1px 8px 0 #e8e2e2;
+        }
+        .index-footer-main a{
+            font-size: 0.6rem;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .index-footer-main a.active{
+           color: rgb(254, 102, 18);
+        }
+        .index-footer-main a i{
+            background: url(img/home1.png);
+            background-size: cover;
+            width: 1rem;
+            height: 1rem;
+            margin-bottom: 0.1rem;
+        }
+        .index-footer-main a.active i{
+            background: url(img/home2.png);
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <h1>ui模板</h1>
+    </div>
+    <!--内容-->
+    <div class="index-content-main">
+        <a class="index-content-flex" href="../ui/choose/index.html">
+            <div class="index-content-model c-change1">选择器，淡入</div>
+        </a>
+        <!--后续内容，js动态添加-->
+    </div>
+    <!--底部-->
+    <div class="index-footer-main">
+        <a class="active" href="#">
+            <i></i>
+            <span>首页</span>
+        </a>
+        <a class="">
+            <i></i>
+            <span>新闻</span>
+        </a>
+        <a class="">
+            <i></i>
+            <span>我的</span>
+        </a>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript">
+        // 底部切换
+        $('.index-footer-main a').on('click',function () {
+            $(this).addClass('active').siblings().removeClass('active')
+        })
+        // 动态添加列表
+        let listModel=[
+            {name:'日期',color:'c-change2',href:'../ui/date/index.html'},
+            {name:'地图',color:'c-change3',href:'../ui/map/index.html'},
+            {name:'播放器',color:'c-change1',href:'../ui/play/index.html'},
+            {name:'定位',color:'c-change2',href:'../ui/map/position.html'},
+            {name:'电子签名',color:'c-change3',href:'../ui/sign/index.html'},
+            {name:'导航切换',color:'c-change1',href:'../ui/pagenav/index.html'},
+            {name:'下拉加载',color:'c-change2',href:'../ui/dropload/index.html'},
+            {name:'二维码',color:'c-change3',href:'../ui/qrcode/index.html'},
+            {name:'弹出，折叠',color:'c-change1',href:'../ui/toast/index.html'},
+            {name:'滑动',color:'c-change2',href:'../ui/slide/index.html'},
+            {name:'列表切换',color:'c-change3',href:'../ui/switch/index.html'},
+            {name:'选择器',color:'c-change1',href:'../ui/select/index.html'},
+            {name:'loading',color:'c-change2',href:'../ui/loading/index.html'},
+            {name:'iscroll',color:'c-change3',href:'../ui/iscroll/index.html'}
+        ]
+        try{
+            for(let i=0;i<listModel.length;i++){
+                $('.index-content-main').append(`
+                    <a class="index-content-flex" href="${listModel[i].href}">
+                        <div class="index-content-model ${listModel[i].color}">${listModel[i].name}</div>
+                    </a>
+                `)
+            }
+        } catch (e) {}
+        //
+    </script>
+</body>
+</html>

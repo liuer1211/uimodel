@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> </title>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css"  href="../../../css/common/base.css" />
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .toast-main{
+            margin-top: 2.5rem;
+        }
+        .t-one{
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+            border-radius: 1.5rem;
+            font-size: 0.8rem;
+            padding: 0.6rem 0;
+        }
+        .a-color1{
+            color: #fff;
+            background-image: linear-gradient(to right, rgb(255, 136, 70), rgb(254, 102, 18))!important;
+        }
+        .t-two{
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+            border-radius: 1.5rem;
+            font-size: 0.8rem;
+            padding: 0.6rem 0;
+            border: none;
+            outline:none;
+        }
+        .mag{
+            padding: 0.6rem;
+        }
+        .t-list-main{
+
+        }
+        .t-list-tit{
+            padding: 0.6rem;
+            background: #f3f3f3;
+        }
+        .t-list-info-main{
+            position: relative;
+        }
+        .t-list-info-main:after,.t-list-info-bot:after{
+            position: absolute;
+            box-sizing: border-box;
+            content: ' ';
+            pointer-events: none;
+            top: 0;
+            right: 0.6rem;
+            left: 0.6rem;
+            border-top: 0.1rem solid #ebedf0;
+        }
+        .t-list-info-up{
+            cursor: pointer;
+            padding: 0.6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .t-list-info-bot{
+            padding: 0.6rem;
+            position: relative;
+            will-change: height;
+            word-break: break-all;
+            word-wrap: break-word;
+            font-size: 0.8rem;
+            display: none;
+        }
+        .t-list-info-main.active .t-list-info-bot{
+            display: block;
+        }
+        .t-list-left{
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding-right: 0.6rem;
+            box-sizing: border-box;
+        }
+        .t-list-info-up i{
+            width: 1rem;
+            height: 1rem;
+            min-width: 1rem;
+            min-height: 1rem;
+            background: url("../../../images/serviceType/iconDown.jpg") no-repeat;
+            background-size: cover;
+            transition: all .3s;
+            transform: rotate(0deg);
+        }
+        .t-list-info-main.active .t-list-info-up i{
+            transform: rotate(180deg);
+        }
+        /*手风琴*/
+        .shou{
+            position: relative;
+        }
+        .shou:after,.t-list-info-bot:after{
+            position: absolute;
+            box-sizing: border-box;
+            content: ' ';
+            pointer-events: none;
+            top: 0;
+            right: 0.6rem;
+            left: 0.6rem;
+            border-top: 0.1rem solid #ebedf0;
+        }
+        .shou.active .t-list-info-bot{
+            display: block;
+        }
+        .shou.active .t-list-info-up i{
+            transform: rotate(180deg);
+        }
+    </style>
+    <style type="text/css">
+        .noscroll{
+            height: 100%;
+            overflow: hidden;
+        }
+        .bg-main{
+            height: 100%;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            left: 0;
+            top: 0;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .bg-main.active{
+            visibility:visible;
+            opacity: 1;
+        }
+        /*toast*/
+        .t-one-main{
+            text-align: center;
+            z-index: 1000;
+            color: #fff;
+            padding: 0.6rem;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            box-sizing: content-box;
+            max-width: 50%;
+            font-size: 0.7rem;
+            word-wrap: break-word;
+            background-color: rgba(50, 50, 51, 0.88);
+            border-radius: 0.3rem;
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+            display: none;
+        }
+        .t-one-main.active{
+            display: block;
+        }
+        .t-one-model{
+
+        }
+        /*列表*/
+        .t-two-main{
+            text-align: center;
+            z-index: 1000;
+            color: #fff;
+            padding: 0.3rem 0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            box-sizing: content-box;
+            width: 50%;
+            max-width: 50%;
+            max-height: 15%;
+            font-size: 0.7rem;
+            word-wrap: break-word;
+            background-color: rgba(50, 50, 51, 0.88);
+            border-radius: 0.3rem;
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+            /*margin-left: -25%;  替换 transform*/
+            /*margin-top: -25%;  替换 transform*/
+            overflow: auto;
+            display: none;
+        }
+        .t-two-main.active{
+            display: block;
+        }
+        .t-one-model{
+            padding: 0.3rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>弹出层</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="toast-main">
+        <div class="mag">
+            <a id="toa" class="t-one a-color1" href="javascript:;">toast弹出</a>
+        </div>
+        <div class="mag">
+            <button id="but" class="t-two">列表弹出</button>
+        </div>
+        <!--list-->
+        <div class="t-list-main">
+            <div class="t-list-tit">折叠面板</div>
+            <div class="t-list-info-main active">
+                <div class="t-list-info-up">
+                    <div class="t-list-left">标题1</div>
+                    <i></i>
+                </div>
+                <div class="t-list-info-bot">
+                    折叠面板
+                    <br/>
+                    内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i
+                </div>
+            </div>
+            <div class="t-list-info-main">
+                <div class="t-list-info-up">
+                    <div class="t-list-left">
+                        <span>标题2</span>
+                    </div>
+                    <i></i>
+                </div>
+                <div class="t-list-info-bot">
+                    内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i
+                </div>
+            </div>
+        </div>
+        <!--list-->
+        <div class="t-list-main">
+            <div class="t-list-tit">手风琴</div>
+            <div class="shou active">
+                <div class="t-list-info-up">
+                    <div class="t-list-left">标题1</div>
+                    <i></i>
+                </div>
+                <div class="t-list-info-bot">
+                    折叠面板
+                    <br/>
+                    内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i
+                </div>
+            </div>
+            <div class="shou">
+                <div class="t-list-info-up">
+                    <div class="t-list-left">
+                        <span>标题2</span>
+                    </div>
+                    <i></i>
+                </div>
+                <div class="t-list-info-bot">
+                    内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i内容i
+                </div>
+            </div>
+        </div>
+        <div style="background: #e5e5e5;height: 20rem"></div>
+        <!--遮罩层-->
+        <div id="bg" class="bg-main"></div>
+        <!--toast-->
+        <div class="t-one-main">
+            <div class="t-one-model">操作成功</div>
+        </div>
+        <!--列表-->
+        <div class="t-two-main">
+            <div class="t-one-model">列表1</div>
+            <div class="t-one-model">列表2</div>
+            <div class="t-one-model">列表3</div>
+            <div class="t-one-model">列表4</div>
+            <div class="t-one-model">列表5</div>
+            <div class="t-one-model">列表6</div>
+        </div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript">
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+        // 切换 第一个 有横线
+        $('.t-list-info-main .t-list-info-up').on('click',function () {
+            let flag=$(this).parent().hasClass('active')
+            if(flag){
+                $(this).parent().removeClass('active')
+            }else {
+                $(this).parent().addClass('active')
+            }
+        })
+        // 切换 手风琴
+        $('.shou .t-list-info-up').on('click',function () {
+            let flag=$(this).parent().hasClass('active')
+            if(flag){
+                $(this).parent().removeClass('active').siblings().removeClass('active')
+            }else {
+                $(this).parent().addClass('active').siblings().removeClass('active')
+            }
+        })
+    </script>
+    <script type="text/javascript">
+        let timeout; //清除延时器
+        // toast弹出
+        $('#toa').on('click',function () {
+            $('html,body').addClass('noscroll');
+            $('.bg-main').addClass('active')
+            $('.t-one-main').addClass('active')
+            // 1.5秒后隐藏
+            // 如果点击后，点击背景层，关闭后。又点击列表按钮，弹出背景。
+            // 这个过程在1.5秒以内，延迟没有执行完，又将背景隐藏了，怎么办？清除延时器
+            timeout=setTimeout(function () {
+                $('html,body').removeClass('noscroll');
+                $('.bg-main').removeClass('active')
+                $('.t-one-main').removeClass('active')
+            },1500)
+        })
+        // 列表弹出
+        $('#but').on('click',function () {
+            $('html,body').addClass('noscroll');
+            $('.bg-main').addClass('active')
+            $('.t-two-main').addClass('active')
+        })
+        // 点击列表，隐藏
+        $('.t-two-main .t-one-model').on('click',function () {
+            $('html,body').removeClass('noscroll');
+            $('.bg-main').removeClass('active')
+            $('.t-two-main').removeClass('active')
+        })
+        // 点击遮罩层
+        $('#bg').on('click',function () {
+            clearTimeout(timeout); //清除延时器
+            $('html,body').removeClass('noscroll');
+            $('.bg-main').removeClass('active')
+            $('.t-one-main').removeClass('active')
+            $('.t-two-main').removeClass('active')
+        })
+    </script>
+</body>
+</html>

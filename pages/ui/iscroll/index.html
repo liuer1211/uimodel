@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .iscroll-main{
+             margin-top: 2.5rem;
+         }
+
+
+        .wrapper{ position:absolute; z-index:1; top:60px; bottom:0; left:0; width:100%; overflow:hidden;}
+        .wrapper .scroller{ position:absolute; z-index:1; width:100%; -webkit-transform:translateZ(0); transform: translateZ(0);}
+
+        @-webkit-keyframes refresh-icon {
+            0% {-webkit-transform: rotate(0deg);}
+            100% {-webkit-transform: rotate(360deg);}
+        }
+        .ani_box{}
+        .ani_box .refresh_box{ width:100%; height:30px; line-height:30px; text-align:center; overflow:hidden; margin-top:-30px; color:#999;}
+        .ani_box .refresh_box span{ display:inline-block;}
+        .ani_box .refresh_box i{ width:30px; height:30px; vertical-align:top; text-align:center; line-height:30px; -webkit-transform:rotate(0deg); transform:rotate(0deg);}
+        .ani_box .refresh_box.on i{ -webkit-animation:refresh-icon 800ms linear infinite;animation:refresh-icon 800ms linear infinite;}
+        .ani_box .load_box{ width:100%; height:30px; line-height:30px; text-align:center; overflow:hidden; margin-bottom:-30px; color:#999;}
+        .ani_box .load_box span{ display:inline-block;}
+        .ani_box .load_box i{ width:30px; height:30px; vertical-align:top; text-align:center; line-height:30px; -webkit-transform:rotate(180deg); transform:rotate(180deg);}
+        .ani_box .load_box.on i{ -webkit-transform:rotate(0deg); transform:rotate(0deg);}
+
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>iscroll</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="iscroll-main"></div>
+
+    <div class="wrapper transition" id="wrapper">
+        <div class="scroller">
+            <div class="ani_box">
+                <div class="refresh_box"><span><i class="iconfont2 transition floatL">&#xe602;</i>刷新数据</span></div>
+                <ul id="list" class="alist">
+                    <li>123</li> <li>123</li> <li>123</li> <li>123</li>
+                </ul>
+                <div class="load_box hide"><span><i class="iconfont2 transition floatL">&#xe601;</i>加载更多</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/iscroll.min.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+    <script type="text/javascript">
+        (function () {
+            var myscroll = null,
+                $wrapper = $("#wrapper");
+            var $list = $("#list"),
+                list_temp = $("#alist_temp").html(),  //填充数据的模板
+                page = 1;
+
+            // 初始化 iscroll
+            var initScroll = function () {
+                var nscroll = new iScroll("wrapper", {
+                    hScrollbar: false,
+                    vScrollbar: true,
+                    fadeScrollbar: true,
+                    onScrollMove: function () {   //拉动页面
+                        // 刷新和加载更多
+                        if (this.y > 45) {
+                            $(".refresh_box").addClass("on");
+                        }else{
+                            $(".refresh_box").removeClass("on");
+                        }
+                        if (this.y <= (this.maxScrollY - 45)) {
+                            $(".load_box").addClass("on");
+                        }else{
+                            $(".load_box").removeClass("on");
+                        }
+                    },
+                    onScrollEnd: function () {  //拉动页面停止
+                        myscroll && myscroll.refresh();
+                        if ($(".refresh_box").hasClass("on")) {
+                            getList(0);  //下拉刷新
+                        }
+                        if ($(".load_box").hasClass("on") && !$(".load_box").hasClass("hide")) {
+                            getList(1);  //上拉加载
+                        }
+                        $(".refresh_box").removeClass("on");
+                        $(".load_box").removeClass("on");
+                    }
+                });
+                return nscroll;
+            }
+
+            var getList = function(npage, callback){
+                if(npage == 0){
+                    page = 1;
+                }else{
+                    page++;
+                }
+                $.ajaxEx({
+                    type: 'get',
+                    url: '/activity/list-data',
+                    data:{
+                        p: page
+                    },
+                    success: function (data) {
+                        if(data.error_code === 0){
+                            if(data.data.count == 0){
+                                $list.html("<li class='null'><img src='/image/icon_tips_6.png' class='img_tips'><span>暂无活动</span>我们的征程是星辰大海<br>快来加入！</li>");
+                                $(".load_box").addClass("hide");
+                            }else{
+                                var ndata = {
+                                    list: data.data.list
+                                }
+                                if(npage == 0){
+                                    $list.html(template(list_temp, ndata));   //这里是模板套数据
+                                }else{
+                                    $list.append(template(list_temp, ndata));  //这里是模板套数据
+                                }
+                                myscroll && myscroll.refresh();
+                                if($("#list li").length >= parseInt(data.data.count)){
+                                    $(".load_box").addClass("hide");
+                                }else{
+                                    $(".load_box").removeClass("hide");
+                                }
+                            }
+                        }else{
+                            $.message.show(data.errmsg);
+                        }
+                    }
+                })
+            }
+            var init = function () {
+                myscroll = initScroll();
+                getList(0);
+            }
+            init();
+        })()
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

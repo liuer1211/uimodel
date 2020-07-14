@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html, body {
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main {
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div {
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .sw-main{
+            margin-top: 2.5rem;
+        }
+        /*横向列表*/
+        .sw-row-list{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0.6rem;
+            box-sizing: border-box;
+        }
+        .row-list{
+            font-size: 0.8rem;
+            color: #000000;
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .row-list:not(:last-child){
+            border-right: 0.01rem solid #afafaf;
+        }
+        .row-list.active:after{
+            display: block;
+            content: "";
+            position: absolute;
+            left: 3.5rem;
+            bottom: -0.4rem;
+            width: 1.7rem;
+            height: 0.2rem;
+            background-color: #eea236;
+            border-radius: 6rem;
+            text-align: center;
+        }
+        .row-list.active{
+            color: #eea236;
+        }
+        /*横向列表内容 主体*/
+        .sw-row-list-info{
+            padding: 0 0.6rem 0.6rem;
+            box-sizing: border-box;
+        }
+        .row-info{
+            display: none;
+        }
+        .row-info.active{
+            display: block;
+        }
+        .sw-col-list-r{
+            background: #eea236;
+        }
+        /*纵向 主体1*/
+        .sw-col-list-main{
+            display: flex;
+        }
+        .sw-col-list{
+            width: 4rem;
+            min-width: 4rem;
+            display: flex;
+            flex-direction: column;
+            background: #dedede;
+        }
+        .sw-col-list-info{
+            flex: 1;
+            box-sizing: border-box;
+            background: #eef1f3;
+        }
+        .col-list{
+            font-size: 0.8rem;
+            color: #000000;
+            padding: 0.6rem;
+            box-sizing: border-box;
+        }
+        .col-list.active{
+            color: #eea236;
+            background: #eef1f3;
+        }
+        .col-info{
+            padding: 0.6rem;
+            display: none;
+        }
+        .col-info.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>列表切换</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="sw-main">
+        <!--横向列表-->
+        <div class="sw-row-list">
+            <div class="row-list active">横向1</div>
+            <div class="row-list">横向2</div>
+        </div>
+        <!--横向列表内容 1 2 -->
+        <div class="sw-row-list-info">
+            <!--纵向列表-->
+            <div class="row-info active">
+                <div class="sw-col-list-main">
+                    <!--纵向列表内容1 列表 左-->
+                    <div class="sw-col-list">
+                        <div class="col-list active">纵向1</div>
+                        <div class="col-list">纵向2</div>
+                        <div class="col-list">纵向3</div>
+                    </div>
+                    <!--纵向列表内容1 内容 右-->
+                    <div class="sw-col-list-info">
+                        <div class="col-info active">纵向 内容 1 col-1</div>
+                        <div class="col-info">纵向 内容 2 col-2</div>
+                        <div class="col-info">纵向 内容 3 col-3</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-info">
+                <div class="sw-col-list-r">横向 内容 2横向 内容 2横向 内容 2横向 内容 2</div>
+            </div>
+        </div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript">
+        // 返回
+        $("#goBack").on("click", function () {
+            window.history.back();
+        })
+        // 切换 横向列表
+        $('.sw-row-list .row-list').on('click',function () {
+            $(this).addClass('active').siblings().removeClass('active')
+            $('.sw-row-list-info .row-info').eq($(this).index()).addClass('active').siblings().removeClass('active')
+        })
+        // 切换 纵向列表
+        $('.sw-col-list .col-list').on('click',function () {
+            $(this).addClass('active').siblings().removeClass('active')
+            $('.sw-col-list-info .col-info').eq($(this).index()).addClass('active').siblings().removeClass('active')
+        })
+    </script>
+</body>
+</html>

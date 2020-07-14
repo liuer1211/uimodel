@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> </title>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css"  href="../../../css/common/base.css" />
+    <link rel="stylesheet" type="text/css"  href="../../../css/sign/sign.css" />
+    <style type="text/css">
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .sign-name-main{
+            margin-top: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>电子签名</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="sign-name-main">
+        <a class="sign-reset" id="sign-reset" href="javascript:void(0);">重置</a>
+        <a class="sign-reset" id="buy" href="javascript:void(0);">确定</a>
+    </div>
+    <div class="sign-can-main">
+        <canvas id="signature-canvas" class="sign-canvas"></canvas>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/zepto.min.js"></script>
+    <script type="text/javascript" src="../../../js/signature_pad.js"></script>
+    <script type="text/javascript">
+        //初始，返回在进入，走这里
+        canvas = document.getElementById('signature-canvas');
+        // minWidth default  0.5
+        // number画笔的笔锋
+        // maxWidth default  2.5
+        // number画笔的粗细
+        // throttle default 16
+        // number每秒绘制的次数,越大越耗性能,越细腻
+        // backgroundColor default null
+        // 画布背景色,可以为 green 字符串,#FFFFFF  rgb(0,0,0)格式
+        // penColor default #000000
+        // 画笔颜色,可以为 green 字符串,#FFFFFF  rgb(0,0,0)格式
+        // velocityFilterWeight default 0.7
+        // number 用于根据先前的速度修改新速度的重量
+        // onBegin
+        // 回调函数,落笔时候的回调
+        // onEnd
+        // 回调函数,收笔时候的回调
+        var signaturePad = new SignaturePad(canvas, {
+            maxWidth:0.1,
+            minWidth:1.5,
+            throttle:16,
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'red'
+        });
+        //阻止键盘弹出 不写这个有的安卓手机上会弹出软键盘
+        $("#signature-canvas").focus(function(){
+            document.activeElement.blur();
+        });
+        //比如 第一次canvas所在div是隐藏 再次调出来要调用这个方法 不然会导致canvas不能绘制内容
+        function resizeCanvas() {
+            signaturePad.clear();
+        }
+        window.onresize = resizeCanvas;
+        resizeCanvas();
+        var dataUrl = signaturePad.toDataURL('image/png');     //图片 base64
+        //去掉data:image/png;base64,我们只要后面的部分iVBORw0KGgoAAAANSUhEUgAAAfgAAAL2CAYAAA......
+        //dataUrl=dataUrl.substring(22,dataUrl.length);
+        //购买
+        $("#buy").on("click",function () {
+            // 判断画布是否为空.返回Boolean 值
+            console.log(dataUrl)
+            console.log(signaturePad.isEmpty())
+        })
+        //重置
+        $("#sign-reset").on("click",function () {
+            signaturePad.clear();
+        })
+    </script>
+    <script type="text/javascript">
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+</body>
+</html>

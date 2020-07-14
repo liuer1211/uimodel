@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下拉，上滑加载数据</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <!--由于部分Android中UC和QQ浏览器头部有地址栏，并且一开始滑动页面隐藏地址栏时，无法触发scroll和resize，
+    所以会导致部分情况无法使用。解决方案1：增加distance距离，例如DEMO2中distance:50；解决方案2：加meta使之全屏显示-->
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/dropload.css"/>
+    <style type="text/css">
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        /*内容*/
+        .drop-main{
+        }
+        .drop-tab-main{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 2.5rem;
+            box-sizing: border-box;
+            padding: 0.6rem 0.6rem;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            background: #fff;
+            z-index: 999;
+        }
+        .drop-tab{
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .drop-tab.active{
+            color: #11f39f;
+        }
+        .drop-tab.active span:after{
+            display: block;
+            content: "";
+            position: absolute;
+            left: 0.7rem;
+            bottom: -0.5rem;
+            width: 1.7rem;
+            height: 0.25rem;
+            background-color: #11f39f;
+            border-radius: 6rem;
+            text-align: center;
+        }
+        .drop-con-main{
+            margin-top: 5rem;
+        }
+        .drop-list{
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 0.6rem;
+            box-sizing: border-box;
+        }
+        .drop-l{
+            margin-right: 0.6rem;
+            border-radius: 0.2rem;
+            width: 4.5rem;
+            height: 4.5rem;
+            min-width: 4.5rem;
+            background: #000;
+        }
+        .drop-r{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            width: 100%;
+        }
+        .drop-r h1,.drop-r p{
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+        .dropload-down{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>下拉加载</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="drop-main">
+        <!--导航-->
+        <div class="drop-tab-main">
+            <div class="drop-tab active">
+                <span>第一</span>
+            </div>
+            <div class="drop-tab">
+                <span>第二</span>
+            </div>
+            <div class="drop-tab">
+                <span>第三</span>
+            </div>
+        </div>
+        <!--内容-->
+        <div class="drop-con-main">
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+            <div class="drop-list">
+                <img class="drop-l" src="" alt="img"/>
+                <div class="drop-r">
+                    <h1>title</h1>
+                    <p>this is info</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--js-->
+    <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/eruda"></script>-->
+    <!--<script>eruda.init();</script>-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/dropload.min.js"></script>
+    <!--dropload下拉加载 https://github.com/ximan/dropload-->
+    <script>
+        $(function(){
+            $('.drop-con-main').dropload({
+                scrollArea : window,
+                domUp : {
+                    domClass   : 'dropload-up',
+                    domRefresh : '<div class="dropload-refresh"><!--↓下拉刷新-自定义内容--></div>',
+                    domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+                    domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+                },
+                domDown : {
+                    domClass   : 'dropload-down',
+                    domRefresh : '<div class="dropload-refresh"><!--↑上拉加载更多-自定义内容--></div>',
+                    domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                    domNoData  : '<div class="dropload-noData">暂无数据</div>'
+                },
+                // 下拉加载
+                loadUpFn : function(me){
+                    $.ajax({
+                        type: 'GET',
+                        url: `https://api.github.com/search/users?q=123`,
+                        dataType: 'json',
+                        success: function(data){
+                            // 有数据
+                            if(data.items.length>0){
+                                let result = '';
+                                for(let i = 0; i < 10; i++){
+                                    result = `
+                                        <div class="drop-list">
+                                            <img class="drop-l" src="" alt="img"/>
+                                            <div class="drop-r">
+                                                <h1>${data.items[i].id}</h1>
+                                                <p>${data.items[i].url}</p>
+                                            </div>
+                                        </div>
+                                   `
+                                    // 添加数据
+                                    $('.drop-con-main').prepend(result);
+                                }
+                            }else { // 无数据
+                            }
+                            // 每次数据加载完，必须重置
+                            me.resetload();
+                            me.noData(false) // 有数据，不显示暂无数据
+                            me.unlock()      // 不锁定，可以继续下拉
+                        },
+                        error: function(xhr, type){
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    });
+                },
+                // 触底加载
+                loadDownFn : function(me){
+                    debugger
+                    $.ajax({
+                        type: 'GET',
+                        url: `https://api.github.com/search/users?q=123`,
+                        dataType: 'json',
+                        success: function(data){
+                            let arrLen = data.items.length;
+                            if(arrLen > 0){
+                                let result = '';
+                                for(let i = 0; i < 10; i++){
+                                    result = `
+                                        <div class="drop-list">
+                                            <img class="drop-l" src="" alt="img"/>
+                                            <div class="drop-r">
+                                                <h1>${data.items[i].id}</h1>
+                                                <p>${data.items[i].url}</p>
+                                            </div>
+                                        </div>
+                                   `
+                                    // 插入数据到页面，放到最后面
+                                    $('.drop-con-main').append(result);
+                                }
+                            }else{// 如果没有数据
+                            }
+                            // 每次数据插入，必须重置
+                            me.resetload();
+                            me.noData(false) // 有数据，不显示暂无数据
+                            me.unlock()      // 不锁定，可以继续下拉
+                        },
+                        error: function(xhr, type){
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    });
+                },
+                threshold : 50,
+                autoLoad : false
+            });
+        });
+        // 一些小问题：
+        // (2) me.noData(); 和 me.noData(true); 表示当前无数据，也就是会在下方出现 （暂无数据）的表示
+        //         me.noData(false);则表示有数据，这时不会显示（暂无数据）
+        // (2). 如果不希望用户继续加载数据则需要锁定，这时候需要用 me.lock(); 如果需要开放则需要 me.unlock();
+        // 有个比较麻烦的点是 ：  你如果仅仅 me.unlock()了，其实你会发现无法下拉，为啥呢？ 因为 me.noData(),
+        //     这里需要告诉dropload有数据了，继续吧， 所以需要调用 me.noData(false)
+    </script>
+    <script type="text/javascript">
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+        // 获取文档高度
+        // 网页可见区域宽： document.body.clientWidth
+        // 网页可见区域高： document.body.clientHeight
+        // 网页可见区域宽： document.body.offsetWidth (包括边线的宽)
+        // 网页可见区域高： document.body.offsetHeight (包括边线的高)
+        // 网页正文全文宽： document.body.scrollWidth
+        // 网页正文全文高： document.body.scrollHeight
+        // 网页被卷去的高： document.body.scrollTop
+        // 网页被卷去的左： document.body.scrollLeft
+        // 网页正文部分上： window.screenTop
+        // 网页正文部分左： window.screenLeft
+        // 屏幕分辨率的高： window.screen.height
+        // 屏幕分辨率的宽： window.screen.width
+        // 屏幕可用工作区高度： window.screen.availHeight
+        // 屏幕可用工作区宽度： window.screen.availWidth
+        // document.documentElement.scrollTop,document.body.scrollTop // 滚动条高度
+        $(document).ready(function(){
+            console.log(document.documentElement.scrollTop,document.body.scrollHeight)
+        });
+        $(document).scroll(function() {
+            var scroH = $(document).scrollTop();  //滚动高度
+            var viewH = $(window).height();  //可见高度
+            var contentH = $(document).height();  //内容高度
+
+            if(scroH >100){  //距离顶部大于100px时
+                console.log(scroH,viewH,contentH)
+            }
+            if (contentH - (scroH + viewH) <= 100){  //距离底部高度小于100px
+                console.log(scroH,viewH,contentH)
+            }
+            if (contentH == (scroH + viewH)){  //滚动条滑到底部啦
+                console.log(scroH,viewH,contentH)
+            }
+        })
+    </script>
+    <!--select2-->
+    <script type="text/javascript">
+    </script>
+</body>
+</html>

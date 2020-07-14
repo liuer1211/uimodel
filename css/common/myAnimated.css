@@ -1,0 +1,40 @@
+/*上到下  渐变*/
+.upToBottom{
+    animation:upToBottom 1s ;
+    -webkit-animation:upToBottom 1s ; /*Safari and Chrome*/
+}
+@keyframes upToBottom
+{
+    from {top:-100px;}/*执行动画的初始位置*/
+    to {top:0;}/*动画结束位置*/
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@-webkit-keyframes upToBottom /*Safari and Chrome*/
+{
+    from {top:-100px;}/*执行动画的初始位置*/
+    to {top:0;}/*动画结束位置*/
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+/*下到上  渐变*/
+.bottomToUp{
+    animation:bottomToUp 1s ;
+    -webkit-animation:bottomToUp 1s ; /*Safari and Chrome*/
+}
+@keyframes bottomToUp
+{
+    from {bottom:-100px;}/*执行动画的初始位置*/
+    to {bottom:0;}/*动画结束位置*/
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+
+}
+@-webkit-keyframes bottomToUp /*Safari and Chrome*/
+{
+    from {bottom:-100px;}/*执行动画的初始位置*/
+    to {bottom:0;}/*动画结束位置*/
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

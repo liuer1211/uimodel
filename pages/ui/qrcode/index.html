@@ -1,0 +1,119 @@
+<!DOCTYPE html  >
+<html  >
+<head>
+    <title> 二维码生成库：QRCode</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .qr-main{
+            margin-top: 2.5rem;
+        }
+        .qr-img{
+            display: block;
+            width: 15rem;
+            height: 20rem;
+            object-fit: cover;
+        }
+        .pad{
+            padding: 0.6rem;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+    <div id="goBack">返回</div>
+    <h1>播放器</h1>
+    <div></div>
+</div>
+    <div class="qr-main">
+        <div class="pad">生成的二维码</div>
+        <div id="qrcode"></div>
+        <div class="pad">图片</div>
+        <img class="qr-img" src="img/img1.jpg" alt=""/>
+        <div class="pad">合成后的图片</div>
+        <img id="qrImg" src=""/>
+    </div>
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../js/qrcode.min.js"></script>
+    <!--二维码-->
+    <script type="text/javascript">
+        let promotionURL="welcome!"
+        // 初始化二维码
+        let qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: promotionURL,                    //二维码承载的信息-跳转网址
+            width: 100,                               //宽度
+            height: 100,                           //高度
+            colorDark: '#000000',                   //二维码前景色
+            colorLight: '#ffffff',                  //二维码背景色
+            correctLevel : QRCode.CorrectLevel.H    //容错级别
+        });
+        // 获取页面图片路径
+        let data=$('.qr-img').attr('src');
+        // 调方法
+        mergeImage(data)
+        // 处理背景图 和 二维码 ，合成背景图
+        function mergeImage(data) {
+            // 定义一张画布
+            let canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 400;
+            let context = canvas.getContext('2d');
+            context.rect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = '#fff';
+            context.fill();
+            // 初始化一张图片，将大图值 赋值给它
+            let myImage = new Image();
+            // 背景图片  你自己本地的图片或者在线图片  --地址
+            myImage.src = data // 非base64
+            myImage.crossOrigin = 'Anonymous'; // 对跨域的图片进行剪切保存
+            // 把背景图放到画布里
+            context.drawImage(myImage, 0, 0, 300, 400); // 位置，宽高
+            // 获取节点 获得二维码的base64 值
+            let mycanvas1 = document.getElementById('qrcode').getElementsByTagName('canvas')[0];
+            let c = mycanvas1.toDataURL('image/png');
+            // 初始化第二张图，将二维码值 赋值给它
+            let myImage2 = new Image();
+            myImage2.src = c // base64
+            // console.log(c)
+            myImage2.crossOrigin = 'Anonymous';
+            // 把二维码放到画布里
+            context.drawImage(myImage2, 0, 0, 100, 100); // 位置，宽高
+            // 现在画布中有两张图了，是合成后的，转换成base64
+            let base64 = canvas.toDataURL('image/png'); // "image/png" 这里注意一下  --转换成base64
+            // 将合成图，赋值给背景图，然后显示
+            $('#qrImg').attr('src',base64)
+            // 不能先将背景图赋值，否则会先显示没有合成的
+        }
+    </script>
+    <script type="text/javascript">
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+</body>
+</html>

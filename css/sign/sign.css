@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+/*
+   2px=0.1rem
+   5px=0.25rem
+   8px=0.4rem
+   10px=0.5rem
+   12px=0.6rem
+   14px=0.7rem
+   16px=0.8rem
+   20px=1rem
+   30px=1.5rem
+   70px=3.5rem
+   100px=5rem
+   110px=5.5rem
+   68px=3.4rem
+   60px=3rem
+   207px=10.35rem
+*/
+
+html {
+    font-size: 20px;
+}
+body {
+    background: #efeff4;
+}
+
+.sign-res-main{
+    padding: 0.8rem;
+}
+.sign-res-cen{
+    color: #6d6d72;
+    font-size: 0.7rem;
+    text-indent:1rem;
+}
+
+.sign-name-main{
+    padding: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sign-name-main span{
+    font-size: 0.7rem;
+    color: #000;
+}
+.sign-name-main a{
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background-color: #eb5c24;
+    font-size: 0.7rem;
+    color: #fff;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    border-radius: 0.2rem;
+}
+
+.sign-can-main{
+    border:0.1rem solid #dfdfdf;
+}
+.sign-canvas{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.sign-foot-main{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+}
+.sign-foot-main a{
+    flex: 1;
+    padding: 0.5rem 0;
+    text-align: center;
+    font-size: 0.8rem;
+    background: #fff;
+    color: #ff7713;
+}
+.sign-foot-main a.active{
+    background: #eb5c24;
+    color: #fff;
+}

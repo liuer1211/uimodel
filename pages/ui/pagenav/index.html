@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> </title>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css"  href="../../../css/common/base.css" />
+    <style type="text/css">
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        /*内容*/
+        .page-nav-main{
+            margin-top: 2.5rem;
+        }
+        .top-main{
+            height: 5rem;
+            background: #b0e6d7;
+            padding: 0.6rem;
+        }
+        .tab-main{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.6rem;
+        }
+        .tab-main.fix{
+            position: fixed;
+            top: 2.5rem;
+            background: #fff;
+            z-index: 999;
+        }
+        .tab-tit{
+            padding: 0 0.6rem 0.3rem;
+            box-sizing: border-box;
+            border-bottom: 0.2rem solid #ffffff00;
+        }
+        .tab-tit.current{
+            border-bottom: 0.2rem solid #11f39f;
+        }
+        .tab-tit a{
+            color: #000;
+        }
+        .tab-tit.current a{
+            color: #11f39f;
+        }
+        .tab-con-main{
+            box-sizing: border-box;
+            padding: 0.6rem;
+        }
+        .tab-con{
+            height: 50rem;
+        }
+        .web-pos-main{
+            width: 3rem;
+            height: 3rem;
+            background: #11f39f;
+            position: fixed;
+            right: 0;
+            bottom: 3rem;
+            text-align: center;
+            padding: 0.2rem;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>导航滑动</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="page-nav-main">
+        <div id="topDiv" class="top-main">
+            <a href="navscroll.html">下一页</a>
+        </div>
+        <!--导航条-->
+        <div id="nav" class="tab-main">
+            <div class="tab-tit current">
+                <a href="#t1">标题1</a>
+            </div>
+            <div class="tab-tit">
+                <a href="#t2">标题2</a>
+            </div>
+            <div class="tab-tit">
+                <a href="#t3">标题3</a>
+            </div>
+        </div>
+        <!--tab内容-->
+        <div class="tab-con-main">
+            <div id="t1" class="tab-con" style="background: #0e7ec6">内容1</div>
+            <div id="t2" class="tab-con" style="background: #3c763d">内容2</div>
+            <div id="t3" class="tab-con" style="background: #eea236">内容3</div>
+        </div>
+        <!--右侧固定-->
+        <div id="webBack" class="web-pos-main">返回顶部</div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nav.min.js"></script>
+    <script type="text/javascript">
+        // 滑动 tab 固定
+        function fix() {
+            let h = document.documentElement.scrollTop || document.body.scrollTop; // 滚动条高度
+            let node=document.getElementById("topDiv");
+            let nodeH=node.offsetHeight;// 元素div高度
+            if (h > nodeH) {
+                $(".tab-main").addClass("fix")
+            } else {
+                $(".tab-main").removeClass("fix")
+            }
+        }
+        //滑动
+        $(window).on('scroll', fix).trigger('scroll');
+        // 使用jquery.nav.min.js
+        $(document).ready(function() {
+            $('#nav').onePageNav();
+            // $('#nav').onePageNav({
+            //     currentClass: 'current',
+            //     changeHash: false,
+            //     scrollSpeed: 750,
+            //     scrollThreshold: 0.5,
+            //     filter: '',
+            //     easing: 'swing',
+            //     begin: function() {
+            //         //I get fired when the animation is starting
+            //     },
+            //     end: function() {
+            //         //I get fired when the animation is ending
+            //     },
+            //     scrollChange: function($currentListItem) {
+            //         //I get fired when you enter a section and I pass the list item of the section
+            //     }
+            // });
+        });
+    </script>
+    <script type="text/javascript">
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+        // 滑动 返回顶部的 隐藏显示
+        function isBackTop() {
+            var $top = $('#webBack');
+            var h = document.documentElement.scrollTop || document.body.scrollTop;
+            $top.hide();
+            if (h > 10) {
+                $top.show();
+                $("#headFix").addClass("active")
+            } else {
+                $top.hide();
+                $("#headFix").removeClass("active")
+            }
+        }
+        //滑动
+        $(window).on('scroll', isBackTop).trigger('scroll');
+        // 返回顶部
+        $("#webBack").click(function() {
+            $('body,html').animate({scrollTop: 0},500);
+            return false;
+        });
+    </script>
+</body>
+</html>

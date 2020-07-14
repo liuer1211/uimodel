@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动到锚点</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css"  href="../../../css/common/base.css" />
+    <style type="text/css">
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .head-main{
+            position: fixed;
+            top: 2.5rem;
+            width: 100%;
+            background: #fff;
+            padding: 0.6rem;
+            box-sizing: border-box;
+        }
+        .nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        a.current{
+            background: yellow;
+            padding: 0.5rem;
+            box-sizing: border-box;
+            display: inline-block;
+            border-radius: 0.3rem;
+        }
+        .container{
+            margin-top: 6rem;
+        }
+        .container div{
+            height: 500px;
+            padding: 0.6rem;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+    <div id="goBack">返回</div>
+    <h1>导航滑动</h1>
+    <div></div>
+</div>
+    <!--顶部导航栏-->
+    <div class="head-main" id="header">
+        <ul class="nav">
+            <li><a href="#con_1" class="current">11</a></li>
+            <li><a href="#con_2" class="">22</a></li>
+            <li><a href="#con_3" class="">33</a></li>
+            <li><a href="#con_4" class="">44</a></li>
+            <li><a href="#con_5" class="">55</a></li>
+        </ul>
+    </div>
+    <!--内容区-->
+    <div class="container">
+        <div id="con_1">111111</div>
+        <div id="con_2">22222</div>
+        <div id="con_3">333333</div>
+        <div id="con_4">44444</div>
+        <div id="con_5">55555</div>
+    </div>
+    <script src="js/navscroll.js"></script>
+    <script type="text/javascript">
+        new navScroll({
+            nav : {                  //导航跳转功能，不需要可以删除此代码块
+                id : 'header',   //点击跳转到容器的导航ID 请把 ID 设置给 UL
+                current : 'current', //默认点击A链接后，默认样式名
+                speed : 25,          //动画执行速度，越小则越快。反之，越慢。
+                fixPx :40            //在导航使用绝对定位且在窗口上方，容器与导航的差,默认为0
+            }
+        });
+        // 原生返回
+        var goBack = document.getElementById("goBack");
+        goBack.onclick = function(){
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        .noscroll{
+            height: 100%;
+            overflow: hidden;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .loading-main{
+            margin-top: 2.5rem;
+            padding: 0.6rem;
+        }
+        .loa-but{
+            padding: 0.6rem;
+            border-radius: 0.5rem;
+            background: #6c6e6e;
+            color: #ffffff;
+            cursor: pointer;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+        }
+        /*遮罩层*/
+        .bg-main{
+            height: 100%;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            left: 0;
+            top: 0;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .bg-main.active{
+            visibility:visible;
+            opacity: 1;
+        }
+        /*loading*/
+        .bg-load{
+            width: 2rem;
+            height: 2rem;
+            z-index: 1001;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            display: none;
+        }
+        .bg-load.active{
+            display: block;
+        }
+        .bg-load i{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 100%;
+            border: 0.1rem solid #666;
+            border-bottom-color: transparent;
+            animation: rotate 0.75s linear infinite;
+        }
+        @-webkit-keyframes rotate {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            50% {
+                -webkit-transform: rotate(180deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(180deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        /*对话框*/
+        .bg-but-main{
+            z-index: 1001;
+            position: absolute;
+            left: 50%;
+            top: 45%;
+            transform: translate3d(-50%, -50%, 0);
+            box-sizing: border-box;
+            min-width: 15rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            display: none;
+        }
+        .bg-but-main.active{
+            display: block;
+        }
+        .bg-but-content{
+            background: #fff;
+        }
+        .bu-but-tit{
+            padding: 0.6rem;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .bu-but-con{
+            padding: 0.3rem 0.6rem 0.9rem;
+            font-size: 0.8rem;
+        }
+        .bu-but-lin{
+            display: flex;
+            align-items: center;
+            border-top: 0.04rem solid #afafaf;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .bu-but-lin div{
+            flex: 1;
+            padding: 0.6rem;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .bu-but-cancel:not(:last-child) {
+            border-right: 0.01rem solid #afafaf;
+        }
+        .bu-but-confirm{
+            color: #1989fa;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>loading</h1>
+        <div></div>
+    </div>
+    <!--内容-->
+    <div class="loading-main">
+        <!--loading-->
+        <button id="load" class="loa-but">loading</button>
+        <br/><br/>
+        <!--对话框-->
+        <button id="but" class="loa-but">对话框</button>
+    </div>
+    <div>
+        <!--遮罩层-->
+        <div class="bg-main"></div>
+        <!--loading-->
+        <div class="bg-load">
+            <i></i>
+        </div>
+        <!--对话框-->
+        <div class="bg-but-main">
+            <div class="bg-but-content">
+                <h1 class="bu-but-tit">标题</h1>
+                <div class="bu-but-con">内容:相关的提示内容</div>
+                <div class="bu-but-lin">
+                    <div id="cancel" class="bu-but-cancel">取消</div>
+                    <div id="confirm" class="bu-but-confirm">确定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+        // loading
+        $("#load").on("click",function () {
+            $('html,body').addClass('noscroll');
+            $(".bg-main").addClass("active")
+            $(".bg-load").addClass("active")
+            timeout=setTimeout(function () {
+                $('html,body').removeClass('noscroll');
+                $('.bg-main').removeClass('active')
+                $('.bg-load').removeClass('active')
+            },1500)
+        })
+        // 对话框
+        $("#but").on("click",function () {
+            $('html,body').addClass('noscroll');
+            $(".bg-main").addClass("active")
+            $(".bg-but-main").addClass("active")
+        })
+        // 取消
+        $("#cancel").on("click",function () {
+            $('html,body').removeClass('noscroll');
+            $(".bg-main").removeClass("active")
+            $(".bg-but-main").removeClass("active")
+        })
+        // 确定
+        $("#confirm").on("click",function () {
+            $('html,body').removeClass('noscroll');
+            $(".bg-main").removeClass("active")
+            $(".bg-but-main").removeClass("active")
+        })
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
