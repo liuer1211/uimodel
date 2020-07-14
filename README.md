@@ -3,6 +3,7 @@
 
 #### 下载地址
  ssh地址：git@github.com:liuer1211/uimodel.git
+   或  
  https地址：https://github.com/liuer1211/uimodel.git
  
  ####  项目git地址
