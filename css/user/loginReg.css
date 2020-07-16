@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/**
+ * @title   CSS Document
+ * @authors dongdong.wang@newtouch.com
+ * @version Ver 1.0.0
+ */
+html {
+    font-size: 20px;
+}
+
+body {
+    background: #ffffff;
+}
+
+.login-bg {
+    width: 100%;
+    height: 10.35rem;
+    background: rgb(254, 102, 18);
+}
+
+.login-head {
+    padding: 0.6rem 0.8rem;
+}
+
+.login-head img {
+    width: 0.7rem;
+    height: 1rem;
+    display: block;
+}
+
+.login-inf {
+    padding: 0 1.2rem 0.5rem;
+    margin-top: -4.5rem;
+}
+
+.login-inf-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2.5rem;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.login-inf-nav {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.login-inf-nav.active {
+    opacity: 1;
+}
+
+.login-inf-bot {
+    background: #ffffff;
+    padding: 1.7rem 0.6rem 3rem;
+    border-radius: 1rem;
+    box-shadow: 0px 3px 13px 0px #e3e0e0;
+}
+
+.login-inf-bot-one {
+    background: rgb(248, 248, 248);
+    padding: 0.4rem 0.6rem;
+    margin-bottom: 0.8rem;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.login-icon-img {
+    width: 0.8rem;
+    height: 1rem;
+    margin-right: 0.6rem;
+    display: block;
+}
+
+.login-inf-bot-one-in {
+    width: 100%;
+    height: 1.5rem;
+    background: rgb(248, 248, 248);
+    font-size: 0.7rem;
+    outline: none;
+    color: #000;
+}
+
+.login-inf-but {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    border-radius: 1.5rem;
+    font-size: 0.8rem;
+    padding: 0.6rem 0;
+    background-image: linear-gradient(to right, rgb(254, 123, 51), rgb(254, 102, 18)) !important;
+    margin-top: 0.4rem;
+}
+
+.login-info-m {
+    width: 3.5rem;
+    height: 1.4rem;
+    margin-left: 0.4rem;
+    display: block;
+    cursor: pointer;
+}
+
+.login-info-span {
+    color: rgb(255, 0, 0);
+    font-size: 0.6rem;
+    width: 6rem;
+    margin-left: 0.4rem;
+    text-align: right;
+    cursor: pointer;
+}
+
+.login-info-span a{
+    color: rgb(254, 102, 18);
+}
+
+.login-inf-ch{
+    padding: 0.3rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-inf-ch-span{
+    color: #000;
+    font-size: 0.6rem;
+}
+
+.login-inf-bot-type{
+    display: none;
+}
+
+.login-inf-bot-type.active{
+    display: block;
+}
+
+@media screen and (max-width: 320px) {
+    .login-info-span {
+        color: rgb(254, 102, 18);
+        font-size: 0.6rem;
+        width: 7rem;
+        margin-left: 0.4rem;
+        text-align: right;
+    }
+}
+
+input::-webkit-input-placeholder {
+    color: rgb(201, 201, 201);
+}
+
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: rgb(201, 201, 201);
+}
+
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: rgb(201, 201, 201);
+}
+
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(201, 201, 201);
+}
