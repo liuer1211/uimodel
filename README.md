@@ -13,4 +13,6 @@
  https://liuer1211.github.io/uimodel/pages/index/index.html
  
 #### 页面效果图
- ![image.png](https://liuer1211.github.io/uimodel/static/imgs/首页.png)
+![image.png](https://liuer1211.github.io/uimodel/static/imgs/img1.png)
+![image.png](https://liuer1211.github.io/uimodel/static/imgs/img2.png)
+![image.png](https://liuer1211.github.io/uimodel/static/imgs/img3.png)
