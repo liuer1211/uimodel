@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ui模板</title>
+    <meta name="keywords" content="通用ui模板，纯静态页面模板">
+    <meta name="description" content="通用ui模板，纯静态页面模板">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="../../css/common/base.css"/>
     <style type="text/css">
@@ -75,8 +77,8 @@
             background: #fff;
             align-items: center;
             height: 2.5rem;
-            padding: 0 0.8rem;
-            box-shadow: 0px -1px 8px 0 #e8e2e2;
+            padding: 0 1.2rem;
+            box-shadow: 0 -1px 8px 0 #e8e2e2;
         }
         .index-footer-main a{
             font-size: 0.6rem;
@@ -89,15 +91,45 @@
            color: rgb(254, 102, 18);
         }
         .index-footer-main a i{
-            background: url(img/home1.png);
+            background: url(img/home3.png);
             background-size: cover;
             width: 1rem;
             height: 1rem;
             margin-bottom: 0.1rem;
+            border-radius: 50%;
         }
         .index-footer-main a.active i{
-            background: url(img/home2.png);
+            background: url(img/home4.png);
             background-size: cover;
+        }
+    </style>
+    <style type="text/css">
+        .demo-block.demo-progress .el-progress--circle {
+            margin-right: 15px;
+        }
+        .el-progress--circle, .el-progress--dashboard {
+            display: inline-block;
+        }
+        .el-progress {
+            position: relative;
+            line-height: 1;
+        }
+        .el-progress--circle .el-progress__text, .el-progress--dashboard .el-progress__text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            transform: translateY(-50%);
+        }
+        .el-progress__text {
+            font-size: 14px;
+            color: #606266;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            line-height: 1;
         }
     </style>
 </head>
@@ -115,17 +147,17 @@
     </div>
     <!--底部-->
     <div class="index-footer-main">
-        <a class="active" href="#">
+        <a class="active" href="javascript:;">
             <i></i>
             <span>首页</span>
         </a>
-        <a class="">
+        <a class="" href="model.html">
             <i></i>
-            <span>新闻</span>
+            <span>实例</span>
         </a>
-        <a class="">
+        <a class="" href="other.html">
             <i></i>
-            <span>我的</span>
+            <span>其他</span>
         </a>
     </div>
     <!--js-->
@@ -150,8 +182,7 @@
             {name:'列表切换',color:'c-change3',href:'../ui/switch/index.html'},
             {name:'选择器',color:'c-change1',href:'../ui/select/index.html'},
             {name:'loading',color:'c-change2',href:'../ui/loading/index.html'},
-            {name:'iscroll',color:'c-change3',href:'../ui/iscroll/index.html'},
-            {name:'新闻百科',color:'c-change1',href:'../ui/wiki/index.html'}
+            {name:'iscroll',color:'c-change3',href:'../ui/iscroll/index.html'}
         ]
         try{
             for(let i=0;i<listModel.length;i++){

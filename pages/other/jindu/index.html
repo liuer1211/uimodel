@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        /*内容*/
+        .jindu-title-main{
+           margin-top: 2.5rem;
+        }
+      </style>
+    <style type="text/css">
+        .demo-block.demo-progress .el-progress--circle {
+            margin-right: 15px;
+        }
+        .el-progress--circle, .el-progress--dashboard {
+            display: inline-block;
+        }
+        .el-progress {
+            position: relative;
+            line-height: 1;
+        }
+        .el-progress--circle .el-progress__text, .el-progress--dashboard .el-progress__text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            transform: translateY(-50%);
+        }
+        .el-progress__text {
+            font-size: 14px;
+            color: #606266;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>进度</h1>
+        <div></div>
+    </div>
+    <!--选择器-->
+    <div class="jindu-title-main">
+        <div style="margin-bottom: 2.5rem">
+            <div role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="el-progress el-progress--circle">
+                <div class="el-progress-circle" style="height: 126px; width: 126px;">
+                    <svg viewBox="0 0 100 100">
+                        <path d="
+                    M 50 50
+                    m 0 -47
+                    a 47 47 0 1 1 0 94
+                    a 47 47 0 1 1 0 -94
+                    " stroke="#e5e9f2" stroke-width="4.8" fill="none" class="el-progress-circle__track" style="stroke-dasharray: 295.31px, 295.31px; stroke-dashoffset: 0px;">
+                        </path>
+                        <path d="
+                    M 50 50
+                    m 0 -47
+                    a 47 47 0 1 1 0 94
+                    a 47 47 0 1 1 0 -94
+                    " stroke="#20a0ff" fill="none" stroke-linecap="round" stroke-width="4.8" class="el-progress-circle__path" style="stroke-dasharray: 73.8274px, 295.31px; stroke-dashoffset: 0px; transition: stroke-dasharray 0.6s ease 0s, stroke 0.6s ease 0s;">
+                        </path>
+                    </svg>
+                </div>
+                <div class="el-progress__text" style="font-size: 16px;">25%</div>
+            </div>
+        </div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+
+    </script>
+</body>
+</html>

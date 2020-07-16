@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>其他类型模板</title>
+    <meta name="keywords" content="通用ui模板，纯静态页面模板">
+    <meta name="description" content="通用ui模板，纯静态页面模板">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+            background: #f3f3f3;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #ffffff;
+            z-index: 999;
+        }
+        /*内容*/
+        .other-content-main{
+            margin: 2.5rem 0;
+            background: #ffffff;
+        }
+        .other-content-main a{
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%
+        }
+        .other-content-main a:not(:last-child){
+            border-bottom: 0.05rem solid #eee;
+        }
+        .other-list-main{
+            display: flex;
+            padding: 0.6rem;
+            box-sizing: border-box;
+        }
+        .other-img{
+            width: 10%;
+        }
+        .other-img>img{
+            border-radius: 50%;
+            width: 1.5rem;
+            min-width: 1.5rem;
+            height: 1.5rem;
+            object-fit: cover;
+            display: block;
+        }
+        .other-flex-main{
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .other-flex-main>div{
+            flex: 1;
+            font-size: 0.8rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            color: #000000;
+        }
+        .other-flex-main>img{
+            width: 0.5rem;
+            min-width: 0.5rem;
+            height: 1rem;
+            object-fit: cover;
+            display: block;
+        }
+        /*底部*/
+        .index-footer-main{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            box-sizing: border-box;
+            background: #fff;
+            align-items: center;
+            height: 2.5rem;
+            padding: 0 1.2rem;
+            box-shadow: 0 -1px 8px 0 #e8e2e2;
+        }
+        .index-footer-main a{
+            font-size: 0.6rem;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .index-footer-main a.active{
+            color: rgb(254, 102, 18);
+        }
+        .index-footer-main a i{
+            background: url(img/home3.png);
+            background-size: cover;
+            width: 1rem;
+            height: 1rem;
+            margin-bottom: 0.1rem;
+            border-radius: 50%;
+        }
+        .index-footer-main a.active i{
+            background: url(img/home4.png);
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <h1>其他模板</h1>
+    </div>
+    <!--内容-->
+    <div class="other-content-main">
+        <a href="../other/jindu/index.html">
+            <div class="other-list-main">
+                <div class="other-img">
+                    <img src="img/img1.png"/>
+                </div>
+                <div class="other-flex-main">
+                    <div>进度</div>
+                    <img src="../../images/user/next.jpg"/>
+                </div>
+            </div>
+        </a>
+        <!--后续内容，js动态添加-->
+    </div>
+    <!--底部-->
+    <div class="index-footer-main">
+        <a class="" href="index.html">
+            <i></i>
+            <span>首页</span>
+        </a>
+        <a class="" href="model.html">
+            <i></i>
+            <span>实例</span>
+        </a>
+        <a class="active" href="javascript:;">
+            <i></i>
+            <span>其他</span>
+        </a>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript">
+        // 底部切换
+        $('.index-footer-main a').on('click',function () {
+            $(this).addClass('active').siblings().removeClass('active')
+        })
+        // 动态添加列表
+        let listModel=[
+            {name:'进度',href:'../other/jindu/index.html',srcUrl:'img/img1.png'},
+            {name:'进度',href:'../other/jindu/index.html',srcUrl:'img/img1.png'}
+        ]
+        try{
+            for(let i=0;i<listModel.length;i++){
+                $('.other-content-main').append(`
+                    <a href="${listModel[i].href}">
+                        <div class="other-list-main">
+                            <div class="other-img">
+                                <img src="${listModel[i].srcUrl}"/>
+                            </div>
+                            <div class="other-flex-main">
+                                <div>${listModel[i].name}</div>
+                                <img src="../../images/user/next.jpg"/>
+                            </div>
+                        </div>
+                    </a>
+                `)
+            }
+        } catch (e) {}
+    </script>
+</body>
+</html>
+
