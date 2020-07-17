@@ -12,19 +12,19 @@ this.bindEvent(this.type);},bindEvent:function(type){var _self=this;function pop
 '<div>'+
 '<div class="gear date_yy" data-datetype="date_yy"></div>'+
 '<div class="date_grid">'+
-'<div>年</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear date_mm" data-datetype="date_mm"></div>'+
 '<div class="date_grid">'+
-'<div>月</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear date_dd" data-datetype="date_dd"></div>'+
 '<div class="date_grid">'+
-'<div>日</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '</div>'+
@@ -42,13 +42,13 @@ function popupYM(e){_self.gearDate=document.createElement("div");_self.gearDate.
 '<div>'+
 '<div class="gear date_yy" data-datetype="date_yy"></div>'+
 '<div class="date_grid">'+
-'<div>年</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear date_mm" data-datetype="date_mm"></div>'+
 '<div class="date_grid">'+
-'<div>月</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '</div>'+
@@ -66,31 +66,31 @@ function popupDateTime(e){_self.gearDate=document.createElement("div");_self.gea
 '<div>'+
 '<div class="gear date_yy" data-datetype="date_yy"></div>'+
 '<div class="date_grid">'+
-'<div>年</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear date_mm" data-datetype="date_mm"></div>'+
 '<div class="date_grid">'+
-'<div>月</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear date_dd" data-datetype="date_dd"></div>'+
 '<div class="date_grid">'+
-'<div>日</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear time_hh" data-datetype="time_hh"></div>'+
 '<div class="date_grid">'+
-'<div>时</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear time_mm" data-datetype="time_mm"></div>'+
 '<div class="date_grid">'+
-'<div>分</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '</div>'+
@@ -108,13 +108,13 @@ function popupTime(e){_self.gearDate=document.createElement("div");_self.gearDat
 '<div>'+
 '<div class="gear time_hh" data-datetype="time_hh"></div>'+
 '<div class="date_grid">'+
-'<div>时</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '<div>'+
 '<div class="gear time_mm" data-datetype="time_mm"></div>'+
 '<div class="date_grid">'+
-'<div>分</div>'+
+'<div></div>'+
 '</div>'+
 '</div>'+
 '</div>'+
