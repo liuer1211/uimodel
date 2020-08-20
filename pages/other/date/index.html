@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .cen{
+            margin-top: 2.5rem;
+            padding: 0.6rem;
+        }
+        .date-div{
+            padding: 0.4rem 0;
+        }
+        .line{
+            background: #7f7f7f;
+            height: 1px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>时间处理</h1>
+        <div></div>
+    </div>
+    <div class="cen">
+        当前时间：
+        <div class="date-div" id="date1"></div>
+        <div class="line"></div>
+        当前时间：转化日期格式 yyyy-MM-dd
+        <div class="date-div" id="date2"></div>
+        <div class="line"></div>
+        当前时间：转化日期格式 yyyy-MM-dd hh:mm:ss
+        <div class="date-div" id="date3"></div>
+        <div class="line"></div>
+        通过身份证获取出生日期: 虚拟号 110101198001010010
+        <div class="date-div" id="date4"></div>
+        <div class="line"></div>
+        时间比较:a ，b  ；  = 0 ; > 1 ; < -1 ;
+        <span id="date55"></span> 和 <span id="date56"></span>
+        <div class="date-div" id="date5"></div>
+        <div class="line"></div>
+        当前时间：+ 1 年
+        <div class="date-div" id="date6"></div>
+        <div class="line"></div>
+        当前时间：+ 1 月
+        <div class="date-div" id="date7"></div>
+        <div class="line"></div>
+        当前时间：+ 1 天
+        <div class="date-div" id="date8"></div>
+        <div class="line"></div>
+        当前时间：+ 1天 + 1月 + 1年
+        <div class="date-div" id="date9"></div>
+        <div class="line"></div>
+        当前时间：时间戳
+        <div class="date-div" id="date10"></div>
+        <div class="line"></div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../js/date.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+    <script type="text/javascript">
+        // 获得当前时间
+        var code1=new Date()
+        $('#date1').text(code1)
+        // 转换时间格式 yyyy-MM-dd
+        var code2= formatDateStr(code1)
+        $('#date2').text(code2)
+        // 转换时间格式 yyyy-MM-dd hh:mm:ss
+        var code3= formatDateTime(code1)
+        $('#date3').text(code3)
+        // 通过身份证获取出生日期
+        var code4= getBirthdayFromIdCard('110101198001010010')
+        $('#date4').text(code4)
+        // 时间比较
+        var code5= compareDate(code2,code2)
+        $('#date5').text(code5)
+        $('#date55').text(code2)
+        $('#date56').text(code2)
+        // 当前时间：+ n年
+        var code6= byDateAddYear(1)
+        $('#date6').text(code6)
+        // 当前时间：+ n月
+        var code7= byDateAddMonth(1)
+        $('#date7').text(code7)
+        // 当前时间：+ n天
+        var code8= byDateAddDay(1)
+        $('#date8').text(code8)
+        // 当前时间：+ n天 + n月 + n年
+        var code9= byYmdAddDate(1,1,1)
+        $('#date9').text(code9)
+        // 时间戳
+        $('#date10').text(Date.now())
+
+    </script>
+</body>
+</html>
