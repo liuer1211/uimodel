@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        /*内容*/
+        .jindu-title-main{
+            margin-top: 2.5rem;
+        }
+    </style>
+    <style type="text/css">
+        #main{
+            width:800px;
+            height:600px;
+            margin: 150px auto;
+            border:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>echarts</h1>
+        <div></div>
+    </div>
+    <div class="jindu-title-main">
+        <!--echarts-->
+        <div id="main">
+
+        </div>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/machina.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+    <script type="text/javascript">
+        var dataList=[
+            {name:"南海诸岛",value:0},
+            {name: '北京', value: randomValue()},
+            {name: '天津', value: randomValue()},
+            {name: '上海', value: randomValue()},
+            {name: '重庆', value: randomValue()},
+            {name: '河北', value: randomValue()},
+            {name: '河南', value: randomValue()},
+            {name: '云南', value: randomValue()},
+            {name: '辽宁', value: randomValue()},
+            {name: '黑龙江', value: randomValue()},
+            {name: '湖南', value: randomValue()},
+            {name: '安徽', value: randomValue()},
+            {name: '山东', value: randomValue()},
+            {name: '新疆', value: randomValue()},
+            {name: '江苏', value: randomValue()},
+            {name: '浙江', value: randomValue()},
+            {name: '江西', value: randomValue()},
+            {name: '湖北', value: randomValue()},
+            {name: '广西', value: randomValue()},
+            {name: '甘肃', value: randomValue()},
+            {name: '山西', value: randomValue()},
+            {name: '内蒙古', value: randomValue()},
+            {name: '陕西', value: randomValue()},
+            {name: '吉林', value: randomValue()},
+            {name: '福建', value: randomValue()},
+            {name: '贵州', value: randomValue()},
+            {name: '广东', value: randomValue()},
+            {name: '青海', value: randomValue()},
+            {name: '西藏', value: randomValue()},
+            {name: '四川', value: randomValue()},
+            {name: '宁夏', value: randomValue()},
+            {name: '海南', value: randomValue()},
+            {name: '台湾', value: randomValue()},
+            {name: '香港', value: randomValue()},
+            {name: '澳门', value: randomValue()}
+        ]
+        var myChart = echarts.init(document.getElementById('main'));
+        function randomValue() {
+            return Math.round(Math.random()*1000);
+        }
+        option = {
+            tooltip: {
+                formatter:function(params,ticket, callback){
+                    return params.seriesName+'<br />'+params.name+'：'+params.value
+                }//数据格式化
+            },
+            visualMap: {
+                min: 0,
+                max: 1500,
+                left: 'left',
+                top: 'bottom',
+                text: ['高','低'],//取值范围的文字
+                inRange: {
+                    color: ['#e0ffff', '#006edd']//取值范围的颜色
+                },
+                show:true//图注
+            },
+            geo: {
+                map: 'china',
+                roam: false,//不开启缩放和平移
+                zoom:1.23,//视角缩放比例
+                label: {
+                    normal: {
+                        show: true,
+                        fontSize:'10',
+                        color: 'rgba(0,0,0,0.7)'
+                    }
+                },
+                itemStyle: {
+                    normal:{
+                        borderColor: 'rgba(0, 0, 0, 0.2)'
+                    },
+                    emphasis:{
+                        areaColor: '#F3B329',//鼠标选择区域颜色
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 0,
+                        shadowBlur: 20,
+                        borderWidth: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            },
+            series : [
+                {
+                    name: '信息量',
+                    type: 'map',
+                    geoIndex: 0,
+                    data:dataList
+                }
+            ]
+        };
+        myChart.setOption(option);
+        myChart.on('click', function (params) {
+            alert(params.name);
+        });
+
+        /*  setTimeout(function () {
+              myChart.setOption({
+                  series : [
+                      {
+                          name: '信息量',
+                          type: 'map',
+                          geoIndex: 0,
+                          data:dataList
+                      }
+                  ]
+              });
+          },1000)*/
+    </script>
+</body>
+</html>
