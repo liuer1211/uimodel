@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .cen{
+            margin-top: 2.5rem;
+            padding: 0.6rem;
+        }
+        .div1{
+            width: 100px;
+            height: 100px;
+            margin: 12px;
+            background: #4CAF50;
+        }
+        .div2{
+            width: 100px;
+            height: 100px;
+            margin: 12px;
+            background: #eea236;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>css</h1>
+        <div></div>
+    </div>
+    <div class="cen">
+        外边距合并(塌陷)问题<br/>
+        <div class="div1"></div>
+        <div class="div2"></div>
+        解决外边距合并(塌陷)问题<br/>
+        display为inline-block, table-cell, table-caption, flex, inline-flex <br/>
+        <div style="display: flex">
+            <div class="div1"></div>
+        </div>
+        <div style="display: inline-block">
+            <div class="div2"></div>
+        </div>
+        <div style="display: inline-block">
+            <div class="div2"></div>
+        </div>
+        <div>--------------------------------</div>
+
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+</body>
+</html>
