@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .cen{
+            margin-top: 2.5rem;
+            padding: 0.6rem;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>html5表单新属性</h1>
+        <div></div>
+    </div>
+    <div class="cen">
+        <from action="">
+            <p>
+                颜色选择控件：
+                <input type="color" name="">
+            </p>
+            <p>
+                日期选择控件：
+                <input type="date" name="">
+            </p>
+            <p>
+                时间选择控件：
+                <input type="time" name="">
+            </p>
+            <p>
+                电子邮件输入控件：
+                <input type="email" style="background: #ddd;" name="">
+            </p>
+            <p>
+                请输入数字：
+                <input type="number" style="background: #ddd;" name="" min="10" max="100">
+            </p>
+            <p>
+                拖拽条：
+                <input type="range" name="" min="10" max="50">
+            </p>
+            <p>
+                搜索：
+                <input type="search" style="background: #ddd;" name="" >
+            </p>
+            <p>
+                请输入网址：
+                <input type="url" name="" style="background: #ddd;"  >
+            </p>
+            <p>
+                <!-- datalist控件 -->
+                请输入省份：
+                <input type="text" name=""  style="background: #ddd;" list="province-list">
+                <datalist id="province-list">
+                    <option value="广东">
+                    <option value="广西">
+                    <option value="河南">
+                    <option value="河北">
+                    <option value="山东">
+                    <option value="山西">
+                    <option value="湖南">
+                    <option value="湖北">
+                </datalist>
+            </p>
+            <p>
+                <input type="submit" style="background: #ddd;" value="提交表单">
+            </p>
+
+
+        </from>
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+</body>
+</html>
