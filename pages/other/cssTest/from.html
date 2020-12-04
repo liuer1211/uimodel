@@ -106,5 +106,27 @@
             window.history.back();
         })
     </script>
+    <script>
+        var num = 1;
+        let obj = {
+            num: 2,
+            add: function() {
+                this.num = 3;
+                (function() {
+                    console.log('a----',this.num);//1 window.num
+                    this.num = 4;
+                })();
+                console.log('b----',this.num);//3 obj.num
+            },
+            sub: function() {
+                console.log('c----',this.num);//4 window.num
+            }
+        }
+        obj.add();//----------------------------------
+        console.log('d----',obj.num);//3 obj.num
+        console.log('e----',num);//4 window.num
+        const sub = obj.sub;
+        sub();//-------------------------------------------------
+    </script>
 </body>
 </html>
