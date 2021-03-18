@@ -1,0 +1,88 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-18 20:22:16
+ * @LastEditTime: 2021-03-18 20:46:22
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \uimodel\pages\other\function\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="../../../css/common/base.css"/>
+    <style type="text/css">
+        html,body{
+            font-size: 20px;
+        }
+        /*头*/
+        .index-title-main{
+            background: #11f39f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5rem;
+            position: fixed;
+            width: 100%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+            box-shadow: -1px 2px 3px 0 #e8e2e2;
+            color: #fff;
+            z-index: 999;
+        }
+        .index-title-main div{
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        /*内容*/
+        .fun-title-main{
+            margin-top: 2.5rem;
+            padding: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!--头-->
+    <div class="index-title-main">
+        <div id="goBack">返回</div>
+        <h1>function</h1>
+        <div></div>
+    </div>
+    <div class="fun-title-main">
+        ---------打开控制台查看--------
+        1.map
+    </div>
+    <!--js-->
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" >
+        // 返回
+        $("#goBack").on("click",function () {
+            window.history.back();
+        })
+    </script>
+    <!-- map -->
+    <script>
+        const arr1 = [1,4,9,16];
+        const map1 = arr1.map(x => x *2);
+        console.log(map1);
+
+        let arr2=[
+            {n:'',m:''},
+            {n:'',m:''}
+        ]
+        
+
+
+
+        // 自定义
+        // const arr = [1,2,3]
+        // const res = map(arr,(item) => {
+        //     return item * 10
+        // })
+        // console.log(res)
+    </script>
+</body>
+</html>
