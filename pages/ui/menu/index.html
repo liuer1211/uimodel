@@ -47,25 +47,67 @@
             border: none;
             outline: none;
         }
-        
+        .model{
+            padding: 0.5rem;
+        }
+        .model span{
+            padding: 0 .3rem;
+        }
+        .model span.active{
+            color: #f00;
+        }
     </style>
 </head>
 <body>
     <!--头-->
     <div class="index-title-main">
         <div id="goBack">返回</div>
-        <h1>loading</h1>
+        <h1>menu</h1>
         <div></div>
     </div>
     <!--内容-->
     <div class="loading-main">
-       
+        <div class="model">
+            颜色：
+            <span class="active">黑色</span>
+            <span>白色</span>
+            <span>黄色</span>
+        </div>
+        <div class="model">
+            容量：
+            <span class="active">64G</span>
+            <span>128G</span>
+            <span>256G</span>
+        </div>
+        <div class="model">
+            版本：
+            <span class="active">公开版</span>
+            <span>移动版</span>
+        </div>
     </div>
    
     <!--js-->
     <script type="text/javascript" src="../../../js/jquery.min.js"></script>
     <script type="text/javascript" >
-        
+        let modelNode = document.querySelectorAll('.model')
+        console.log(modelNode)
+        for(var i=0;i<modelNode.length;i++){
+            console.log(i)
+            let spanNode = modelNode[i].querySelectorAll('.model span')
+
+            for(var j=0; j<spanNode.length; j++){
+                console.log('j',j)
+
+                spanNode[j].onclick= function(){
+                    console.log(spanNode[j])
+
+                    for(var k=0;k<spanNode.length;k++){
+                        spanNode[k].style.color="#000"
+                        this.style.color = "#f00"
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
